@@ -1,0 +1,45 @@
+h1 {
+    color: maroon;
+}
+
+.post{
+
+    background-color: blanchedalmond;
+}
+
+.user {
+    font-style: italic;
+}
+
+
+.btn-index{
+   text-decoration: none;
+    color: #fb0000;
+    background-color: #f4ff9b;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.btn1{
+    color: #ff3100;
+    background-color: #261c11;
+    padding: 10px 5px;
+    margin: 6px;
+}
+
+
+
+.delete-btn{
+    color: #fb0000;
+    background-color: #f4ff9b;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    position: relative;
+    /* right: -191px; */
+    left: 204px;
+    bottom: 22px;
+    border: none;
+}
