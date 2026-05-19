@@ -1,0 +1,77 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO LIST</title>
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div class="container">
+        <h1>TODO LIST</h1>
+        
+        <a href="/todos/new" class="btn-link">
+            <button class="add-btn">+ Add New Task</button>
+        </a>
+
+        <div class="todo-list">
+            <% for(todo of todos) { %>
+                <div class="todo">
+                    <% if (todo.isCompleted) { %>
+                        <h2 class="task completed"><%= todo.task %></h2>
+                    <% } else { %>
+                        <h2 class="task"><%= todo.task %></h2>
+
+                        <form action="/todos/<%= todo.id %>?_method=PATCH" method="POST" style="margin-left: auto;">
+                            <button type="submit" class="status-btn">[ COMPLETE ]</button>
+                        </form>
+                    <% } %>
+
+                    <form action="/todos/<%= todo.id %>?_method=DELETE" method="POST" style="<%= todo.isCompleted ? 'margin-left: auto;' : 'margin-left: 10px;' %>">
+                        <button type="submit" class="delete-btn">[ DELETE ]</button>
+                    </form>
+                 </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO LIST</title>
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div class="container">
+        <h1>TODO LIST</h1>
+        
+        <a href="/todos/new" class="btn-link">
+            <button class="add-btn">+ Add New Task</button>
+        </a>
+
+        <div class="todo-list">
+            <% for(todo of todos) { %>
+                <div class="todo">
+                    <% if (todo.isCompleted) { %>
+                        <h2 class="task completed"><%= todo.task %></h2>
+                    <% } else { %>
+                        <h2 class="task"><%= todo.task %></h2>
+
+                        <form action="/todos/<%= todo.id %>?_method=PATCH" method="POST" style="margin-left: auto;">
+                            <button type="submit" class="status-btn">[ COMPLETE ]</button>
+                        </form>
+                    <% } %>
+
+                    <form action="/todos/<%= todo.id %>?_method=DELETE" method="POST" class="delete-form">
+                        <button type="submit" class="delete-btn">[ DELETE ]</button>
+                    </form>
+                    </form>
+                 </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

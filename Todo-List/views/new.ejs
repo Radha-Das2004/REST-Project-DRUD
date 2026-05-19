@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Todo</title>
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CREATE TASK</h1>
+
+        <form action="/todos" method="POST" class="todo-form">
+            <input type="text" name="task" class="task-input" placeholder="Write your task here..." required autofocus>
+            
+            <button type="submit" class="add-btn">Initialize Task</button>
+        </form>
+
+        <br>
+        <a href="/todos" class="btn-link back-link"> [ Return to Terminal ] </a>
+    </div>
+</body>
+</html>
