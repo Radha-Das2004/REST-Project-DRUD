@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Tracker</title>
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="h1">Movie Tracker</h1>
+        <% for( let movie of movies ) { %>
+            <div class="movie">
+                <span class="span-movie-image"><img src="<%= movie.image %>" class="movie-image" alt="<%= movie.title %>"></span>
+                <h2 class="h2-title"><%= movie.title %></h2>
+                <div class="movie-info">
+                    
+                    <p class="p-genre">Genre: <%= movie.genre %></p>
+                    <p class="p-genre">Rating: <%= movie.rating %></p>
+                </div>
+                <div class="movie-info2">
+                    <a href="http://localhost:3000/movies/<%= movie.id %>" class="add-movie-link">View Details</a>
+                    <a href="http://localhost:3000/movies/<%= movie.id %>/edit" class="add-movie-link">Edit Movie</a>
+                    
+                </div> 
+                    <span class="movie-info3">
+                        <form action="/movies/<%= movie.id %>?_method=DELETE" method="POST" class="add-movie-link1">
+                            <button type="submit" class="add-movie-link">Delete Movie</button>
+                        </form>
+                    </span>
+            </div>
+        <% } %>
+        <a href="http://localhost:3000/movies/new" class="add-movie-link">Add New Movie</a>
+    </div>
+</body>
+</html>
