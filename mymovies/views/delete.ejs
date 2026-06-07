@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Confirmation</title>
+    <link rel="stylesheet" href="/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <div class="container delete-container">
+        <div class="warning-icon">⚠️</div>
+        <h1 class="h1 delete-heading">Danger Zone</h1>
+        <p class="instruction-text">Are you sure you want to permanently delete <strong><%= movie.title %></strong>?</p>
+        
+        <form action="/movies/<%= movie.id %>?_method=DELETE" method="POST" class="movie-form">
+            <div class="form-container">
+                
+                <div class="preview-meta">
+                    <p><span>Genre:</span> <%= movie.genre %></p>
+                    <p><span>Rating:</span> ⭐ <%= movie.rating %></p>
+                </div>
+
+                <div class="form-group alert-group">
+                    <label for="password">Enter Security Password to Confirm:</label>
+                    <input type="password" id="password" class="from-input" name="password" placeholder="••••••••" required />
+                </div>
+
+                <div class="form-actions-row">
+                    <button type="submit" class="btn btn-confirm-delete">Delete Permanently</button>
+                    <a href="/movies" class="btn-cancel">No, Go Back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -3,21 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ID</title>
+    <title><%= movie.title %> - Details</title>
     <link rel="stylesheet" href="/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1 class="h1">Movies Details</h1>
-        <div class="movie">
-            <span class="span-movie-image"><img src="<%= movie.image %>" class="movie-image" alt="<%= movie.title %>"></span>
-            <h2 class="h2-title"><%= movie.title %></h2>
-            <div class="movie-info1">
-                 <span> <p class="p-genre">Genre: <%= movie.genre %></p></span>
-                 <span> <p class="p-genre">Rating: <%= movie.rating %></p></span>
+    <div class="overlay"></div>
+
+    <div class="container detail-container">
+        <h1 class="h1">Movie Details</h1>
+        
+        <div class="movie detail-view">
+            <div class="span-movie-image detail-image-wrapper">
+                <img src="<%= movie.image %>" class="movie-image" alt="<%= movie.title %>">
             </div>
-            <span> <a href="http://localhost:3000/movies" class="add-movie-link">Back to Movies List</a></span>
             
+            <h2 class="h2-title detail-title"><%= movie.title %></h2>
+            
+            <div class="movie-info1 detail-info-badges">
+                 <span class="badge-info">Genre: <%= movie.genre %></span>
+                 <span class="badge-info rating-badge">⭐ <%= movie.rating %> / 10</span>
+            </div>
+            
+            <div class="detail-actions">
+                 <a href="/movies" class="btn-back">← Back to Movies List</a>
+            </div>
         </div>
     </div>
 </body>

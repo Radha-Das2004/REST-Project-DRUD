@@ -1,189 +1,668 @@
-*{
-    font-family: 'Inter', sans-serif;
-}
-
-body{
-    /* background-color: #f5f5f5; */
-    background-image: url("/movies/background-i.jpeg");
+/* Global Reset */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-.container{
-    max-width: 700px;
-    margin: 0 auto;
+body {
+    background: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    position: relative;
+    padding: 20px;
+}
+
+/* Background dark tint overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(15, 15, 25, 0.85), rgba(30, 20, 40, 0.9));
+    z-index: 1;
+}
+
+/* Glassmorphism Main Form Container */
+.container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 450px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    padding: 35px 30px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Heading Style */
+.h1-new {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
+}
+
+/* Individual Form Group Items */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #cbd5e1;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+/* Premium Inputs */
+.from-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    color: #ffffff;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.from-input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+/* Input Focus Glow Effect */
+.from-input:focus {
+    border-color: #a855f7;
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+}
+
+/* Number selector custom tweaks for rating */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    opacity: 1;
+}
+
+/* Premium Glow Submit Button */
+.add-movie-link {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #8b5cf6, #d946ef);
+    color: #ffffff;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+    transition: all 0.3s ease;
+}
+
+.add-movie-link:hover {
+    background: linear-gradient(135deg, #7c3aed, #c084fc);
+    box-shadow: 0 12px 25px rgba(139, 92, 246, 0.5);
+    transform: translateY(-2px);
+}
+
+.add-movie-link:active {
+    transform: translateY(0);
+}
+
+/* Split Layout Container */
+.container2 {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+/* Side Cards base setup */
+.container1 {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Headings inside cards */
+.h1, .h1-new {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+}
+
+/* LEFT SIDE: Preview Specifics */
+.movie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.movie-image {
+    width: 100%;
+    max-width: 180px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    border: 2px solid rgba(255,255,255,0.1);
+    margin-bottom: 15px;
+}
+
+.h2-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.movie-info1 {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.badge-info {
+    background: rgba(168, 85, 247, 0.2);
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.db-password-text {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-bottom: 15px;
+}
+
+.db-password-text span {
+    color: #f43f5e; /* Highlight old password */
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn-secondary {
+    display: inline-block;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.btn-secondary:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Input Form Specific Tweaks */
+.highlight-group label {
+    color: #f43f5e; /* Password input visual guide */
+    font-weight: 600;
+}
+
+.highlight-group .from-input {
+    border-color: rgba(244, 63, 94, 0.3);
+}
+
+.highlight-group .from-input:focus {
+    border-color: #f43f5e;
+    box-shadow: 0 0 10px rgba(244, 63, 94, 0.4);
+}
+
+/* Responsive Handling (Mobile Screen Optimization) */
+@media (max-width: 768px) {
+    .container2 {
+        flex-direction: column;
+        padding: 10px;
+    }
+}
+
+/* Layout Wrapper */
+.main-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Header and "Add New" layout alignment */
+.movies-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 20px;
+}
+
+.btn-add-new {
+    background: linear-gradient(135deg, #8b5cf6, #d946ef);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-add-new:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(139, 92, 246, 0.5);
+}
+
+/* CSS Grid - Automatically adjusts card columns based on screen size */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+    width: 100%;
+}
+
+/* Individual Movie Card (Premium Glassmorphism) */
+.movie-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(168, 85, 247, 0.4);
+    box-shadow: 0 20px 40px rgba(168, 85, 247, 0.15);
+}
+
+/* Fixed Poster Aspect Ratio */
+.span-movie-image {
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    position: relative;
+}
+
+.movie-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.movie-card:hover .movie-image {
+    transform: scale(1.06);
+}
+
+/* Card Body Content */
+.movie-card-body {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    /* background-color: #C9FEFF; */
-    gap:20px;
+    flex-grow: 1;
 }
 
-.h1{
-   background-color: #A582BD;
-    height: 43px;
-    width: 254px;
-    text-align: center;
-    border: 2px solid #525CAB;
-    border-radius: 10px;
+.movie-card-body .h2-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.movie{
-    height: 500px;
-    width: 350px;
-    background-color: #A3EFEE;
+/* Info Badges (Genre & Rating) */
+.movie-info {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 10px;
-    border: 2px solid #8EA1F6;
-    /* justify-content: space-evenly; */ 
-}
-
-/* .movie:hover{
-    background-color: #8EA1F6;
-    cursor: pointer;
-} */
-
-.span-movie-image{
-    height: 300px;
-    width: 100%;
-
-}
-
-.movie-image{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-}
-.movie-info{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    gap:10px;
-    height: 59px;
-    width: 280px;
-    position: relative;
-    bottom: 27px;
-    border-radius: 12px;
-}
-
-.p-genre{
-    background-color: #f2faef;
-    padding: 12px 22px;
-    border-radius: 10px;
-    border: 2px solid #525CAB;
-}
-
-.h2-title{
-    font-size: 26px;
-    font-weight: 800;
-    font-style: italic;
-    background-color: #8EA1F6;
-    height: 50px;
-    width: 320px;
-    text-align: center;
-    /* background-color: #525CAB; */
-    position: relative;
-    bottom: 14px;
-    border-radius: 10px;
-    border: 2px solid #525CAB;
-   
-}
-
-.add-movie-link{
-    background-color: #525CAB;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    border: 2px solid #525CAB;
-}
-
-.add-movie-link:hover{
-    background-color: #8EA1F6;
-    border: 2px solid #8EA1F6;
-    cursor: pointer;
-}
-
-/*  new ejs */
-.h1-new{
-     background-color: #A582BD;
-    height: 43px;
-    width: 330px;
-    padding-top: 10px;
-    text-align: center;
-    border: 2px solid #525CAB;
-    border-radius: 10px;
-}
-
-.form-container{
-    background-color: #FFF0CF;
-    height: 200px;
-    width: 500px;
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
+}
+
+.genre-tag {
+    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 8px;
+    color: #cbd5e1;
+}
+
+.rating-tag {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fbbf24;
+}
+
+/* Action Buttons Grid Layout */
+.movie-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+/* Base button rules */
+.action-btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
     border-radius: 10px;
-    border: 2px solid #000;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    box-shadow: 13px -3px 9px 4px rgb(16 36 230 / 10%);
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    width: 100%;
 }
 
-.from-input{
-    height: 30px;
-    width: 300px;
-    border-radius: 5px;
-    border: 2px solid #000;
-    padding-left: 10px;
+.btn-view {
+    background: rgba(168, 85, 247, 0.2);
+    color: #c084fc;
+    border: 1px solid rgba(168, 85, 247, 0.4);
 }
 
-/*  SHow EJS */
-.movie-info1{
+.btn-view:hover {
+    background: #8b5cf6;
+    color: #fff;
+}
+
+.btn-edit {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-edit:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Delete Button spanning full width */
+.btn-delete {
+    background: rgba(244, 63, 94, 0.15);
+    color: #f43f5e;
+    border: 1px solid rgba(244, 63, 94, 0.3);
+}
+
+.btn-delete:hover {
+    background: #e11d48;
+    color: #fff;
+}
+
+/* Single Detail Card Layout */
+.detail-container {
+    max-width: 500px; /* Thoda zyada width single view ke liye */
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.movie-view {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
-    gap: 10px;
-    height: 59px;
-    width: 311px;
-    position: relative;
-    bottom: 32px;
 }
 
+/* Detail Page Poster Specific Style */
+.detail-image-wrapper {
+    width: 100%;
+    max-width: 240px;
+    height: 340px;
+    margin: 0 auto 20px auto;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+}
 
-/*  Movie Edits */
-.container2{
-     max-width: 1087px;
-    margin: 0 auto;
-    padding: 40px;
+.detail-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+/* Badges arrangement */
+.detail-info-badges {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    /* background-color: #C9FEFF; */
-    gap: 97px;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
 }
 
-.movie-info2{
+.rating-badge {
+    background: rgba(251, 191, 36, 0.15) !important;
+    border-color: rgba(251, 191, 36, 0.4) !important;
+    color: #fbbf24;
+    font-weight: 600;
+}
+
+/* Back Button Styling */
+.btn-back {
+    display: inline-block;
+    padding: 12px 30px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+    background: #ffffff;
+    color: #1e1b4b; /* Dark text on hover */
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Smooth Entrance Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ========================================================
+   ONLY DELETE PAGE STYLES (BAAKI CODE KO CHHEDE BINA)
+   ======================================================== */
+
+/* Delete Page Ka Main Card Container */
+.delete-container {
+    max-width: 450px;
+    margin: 30px auto;
+    border-color: rgba(244, 63, 94, 0.2); /* Light Red Alert Border */
+    box-shadow: 0 20px 50px rgba(244, 63, 94, 0.15);
+    text-align: center;
+}
+
+/* Delete Page Ki Warning Heading */
+.delete-heading {
+    color: #ffffff;
+    text-shadow: 0 0 12px rgba(244, 63, 94, 0.6) !important;
+}
+
+/* Form ke andar ka text instruction */
+.instruction-text {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+/* Purana data preview dikhane ke liye block */
+.preview-meta {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 25px;
     display: flex;
-    flex-direction: row;
+    justify-content: space-around;
+    font-size: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.preview-meta span {
+    color: #94a3b8;
+}
+
+/* Danger Alert Input Box Group */
+.alert-group label {
+    color: #f43f5e; /* Red Label */
+    font-weight: 500;
+}
+
+.alert-group .from-input {
+    border-color: rgba(244, 63, 94, 0.3);
+}
+
+.alert-group .from-input:focus {
+    border-color: #f43f5e;
+    box-shadow: 0 0 10px rgba(244, 63, 94, 0.4);
+}
+
+/* Button Configuration Row */
+.form-actions-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+/* Red Confirm Delete Button */
+.btn-confirm-delete {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #e11d48, #be123c);
+    color: #ffffff;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(225, 29, 72, 0.3);
+}
+
+.btn-confirm-delete:hover {
+    background: linear-gradient(135deg, #f43f5e, #e11d48);
+    box-shadow: 0 6px 20px rgba(225, 29, 72, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Go Back / Cancel Link Button */
+.btn-cancel {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    text-align: center;
+}
+
+.btn-cancel:hover {
+    color: #ffffff;
+}
+
+/* Movies Grid Layout */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    width: 100%;
+}
+
+/* Individual Movie Card */
+.movie-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 15px; /* Border ke andar padding taaki image soft lage */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+/* Image Wrapper Layout */
+.span-movie-image {
+    width: 100%;
+    height: 340px; /* Poster card ki uniform height */
+    overflow: hidden;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.2); /* Frame look dene ke liye */
+    display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-evenly;
-    gap: 10px;
-    height: 59px;
-    width: 311px;
-    position: relative;
-    bottom: 27px;
 }
 
-.movie-info3{
-    position: relative;
-    bottom: 22px;
+/* --- KRANTIKARI FIX: Image Ko Poora Dikhane Ke Liye --- */
+.movie-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Isse image bina kate puri aur perfect ratio mein dikhegi */
+    border-radius: 18px;
 }
 
+/* Details Page Poster Adjustment */
+.detail-image-wrapper {
+    max-width: 260px;
+    height: 380px;
+    margin: 0 auto 20px auto;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
