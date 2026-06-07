@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDIT USERNAME</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Edit User Profile</h2>
+        <p class="user-info">You are editing: <strong><%= user.email %></strong></p>
+        
+        <form method="post" action="/user/<%= user.id %>?_method=PATCH">
+            <div class="input-group">
+                <label for="username">New Username</label>
+                <input type="text" id="username" name="username" value="<%= user.username %>" placeholder="Enter new username" required />
+            </div>
+
+            <div class="input-group">
+                <label for="password">Confirm Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter password to confirm" required />
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-update">Update Username</button>
+                <a href="/user" class="btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDIT USERNAME</title>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+    <h2>YOU are about to edit this user  : <%= user.email %></h2>
+    <form method="post" action="/user/<%= user.id %>?_method=PATCH">
+        <textarea name="username" ><%= user.username %></textarea>
+        <input type="password" name="password" placeholder="Enter password"/>
+        <button>EDIT </button>
+    </form>
+</body>
+</html> -->

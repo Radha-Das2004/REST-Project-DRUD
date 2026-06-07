@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALL Users</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="table-container">
+        <div class="table-header">
+            <h2>All Registered Users</h2>
+            <form method="GET" action="/user/new-user">
+                <button class="btn btn-add">+ Add New User</button>
+            </form>
+        </div>
+
+        <table class="users-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+               <% for(user of users){ %>
+                    <tr>
+                        <td class="id-cell"><%= user.id %></td>
+                        <td class="username-cell"><%= user.username %></td>
+                        <td><%= user.email %></td>
+                        <td class="pass-cell"><%= user.password %></td>
+                        <td>
+                            <form method="GET" action="/user/<%= user.id %>/edit">
+                                <button class="btn btn-edit">Edit</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="GET" action="/user/<%= user.id %>/delete">
+                                <button class="btn btn-delete">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>    
+    </div>
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALL Users</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+          
+        }
+        
+    </style>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+    <h2>All Users</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+        </tr>
+       <% for(user of users){ %>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.username %></td>
+                <td><%= user.email %></td>
+                 <td><%= user.password %></td>
+                <td>
+                    <form method="GET" action="/user/<%= user.id %>/edit">
+                        <button>Edit Username</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="GET" action="/user/<%= user.id %>/delete">
+                        <button>Delete User</button>
+                    </form>
+                </td>
+            </tr>
+        <% } %>
+       
+        <form method="GET" action="/user/new-user">
+                        <button>NEW User</button>
+        </form>
+    </table>    
+</body>
+</html> -->
