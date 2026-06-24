@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Student Record</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <input type="checkbox" id="themeToggle" class="theme-checkbox">
+    
+    <div class="theme-wrapper">
+        <div class="toggle-container">
+            <label for="themeToggle" class="btn-theme-toggle">
+                <span class="light-icon">☀️ Light Mode</span>
+                <span class="dark-icon">🌙 Dark Mode</span>
+            </label>
+        </div>
+
+        <div class="form-container">
+            <header class="form-header">
+                <a href="/student" class="btn-back">← Back to Roster</a>
+            </header>
+
+            <main class="form-card delete-card">
+                <div class="danger-icon-wrapper">⚠️</div>
+                
+                <h1>Delete Student Record</h1>
+                <p class="subtitle danger-subtitle">This action is permanent and cannot be undone. All data linked with this profile will be purged from the SQL ledger.</p>
+
+                <div class="verification-hint-box">
+                    <span class="hint-label">Required Security Key Authorization:</span>
+                    <span class="hint-value"><%= student.password %></span>
+                </div>
+
+                <form method="post" action="/student/<%= student.id %>?_method=DELETE" class="crud-form">
+                    <div class="form-group spec-danger-group">
+                        <label for="password">Confirm Account Password</label>
+                        <input type="text" id="password" name="password" placeholder="Enter the security key above to verify authorization" required />
+                    </div>
+
+                    <button class="btn-primary btn-danger-action">Permanently Purge Record</button>
+                </form>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

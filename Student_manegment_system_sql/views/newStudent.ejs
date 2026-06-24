@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Student</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <input type="checkbox" id="themeToggle" class="theme-checkbox">
+    
+    <div class="theme-wrapper">
+        <div class="toggle-container">
+            <label for="themeToggle" class="btn-theme-toggle">
+                <span class="light-icon">☀️ Light Mode</span>
+                <span class="dark-icon">🌙 Dark Mode</span>
+            </label>
+        </div>
+
+        <div class="form-container">
+            <header class="form-header">
+                <a href="/student" class="btn-back">← Back to Roster</a>
+                <h1>Add New Student</h1>
+                <p class="subtitle">Enter the official credential details to register a new profile into the student ledger.</p>
+            </header>
+
+            <main class="form-card">
+                <form method="post" action="/student" class="crud-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required />
+                    </div>
+
+                    <div class="form-grid-2col">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john.doe@example.com" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" required />
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2col">
+                        <div class="form-group">
+                            <label for="date_of_birth">Date of Birth</label>
+                            <input type="date" id="date_of_birth" name="date_of_birth" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="course">Assigned Course</label>
+                            <select id="course" name="course" required>
+                                <option value="">-- Choose Course --</option>
+                                <option value="bca">BCA</option>
+                                <option value="bba">BBA</option>
+                                <option value="btech">B.Tech</option>
+                                <option value="mba">MBA</option>
+                                <option value="mca">MCA</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2col">
+                        <div class="form-group">
+                            <label for="status">Profile Status</label>
+                            <select id="status" name="status">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Profile Image URL</label>
+                            <input type="text" id="image" name="image" placeholder="https://example.com/photo.jpg" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Create Secure Password</label>
+                        <input type="password" id="password" name="password" placeholder="••••••••" required />
+                    </div>
+
+                    <button class="btn-primary submit-btn">Register Student Record</button>
+                </form>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <input type="checkbox" id="themeToggle" class="theme-checkbox">
+    
+    <div class="theme-wrapper">
+        <div class="toggle-container">
+            <label for="themeToggle" class="btn-theme-toggle">
+                <span class="light-icon">☀️ Light Mode</span>
+                <span class="dark-icon">🌙 Dark Mode</span>
+            </label>
+        </div>
+
+        <div class="hero-container">
+            <header class="hero-header">
+                <h1>Student Management System</h1>
+                <p class="subtitle">Manage, track, and scale student analytics effortlessly.</p>
+            </header>
+
+            <main class="metric-card">
+                <span class="card-badge">Live Counter</span>
+                <h2><%= count %></h2>
+                <p class="counter-label">Total Active Students Enrolled</p>
+                
+                <form method="get" action="/student">
+                    <button class="btn-primary">Enter Dashboard →</button>
+                </form>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

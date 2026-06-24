@@ -1,0 +1,608 @@
+/* Modern Reset & Variable Setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Base Light Layout Variable Configuration */
+.theme-wrapper {
+    --bg-main: #FAFAFA;
+    --bg-card: #FFFFFF;
+    --text-main: #111827;
+    --text-muted: #6B7280;
+    --accent-color: #2563EB;
+    --accent-hover: #1D4ED8;
+    --border-color: #E5E7EB;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    --toggle-bg: #E5E7EB;
+    
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%;
+}
+
+/* Pure CSS Dark Mode Class Mapping via Sibling Combinator */
+.theme-checkbox:checked ~ .theme-wrapper {
+    --bg-main: #0B0F19;
+    --bg-card: #131A26;
+    --text-main: #F9FAFB;
+    --text-muted: #9CA3AF;
+    --accent-color: #3B82F6;
+    --accent-hover: #2563EB;
+    --border-color: #1F2937;
+    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    --toggle-bg: #1F2937;
+}
+
+/* Hide the raw native checkbox completely */
+.theme-checkbox {
+    display: none;
+}
+
+/* Toggle Control System */
+.toggle-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.btn-theme-toggle {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: inline-flex;
+    box-shadow: var(--shadow);
+    transition: background-color 0.2s, border-color 0.2s;
+    user-select: none;
+}
+
+.btn-theme-toggle:hover {
+    background-color: var(--toggle-bg);
+}
+
+/* Toggle Label States without Scripts */
+.theme-checkbox ~ .theme-wrapper .dark-icon { display: none; }
+.theme-checkbox ~ .theme-wrapper .light-icon { display: inline; }
+.theme-checkbox:checked ~ .theme-wrapper .dark-icon { display: inline; }
+.theme-checkbox:checked ~ .theme-wrapper .light-icon { display: none; }
+
+/* Dashboard Core Layout */
+.hero-container {
+    width: 100%;
+    max-width: 520px;
+    text-align: center;
+}
+
+.hero-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
+.hero-header .subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+}
+
+/* Metric Display Card Component */
+.metric-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 40px 32px;
+    box-shadow: var(--shadow);
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #059669;
+    background-color: rgba(16, 185, 129, 0.1);
+    padding: 4px 12px;
+    border-radius: 9999px;
+    margin-bottom: 16px;
+}
+
+.metric-card h2 {
+    font-size: 4.5rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+.counter-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    font-weight: 500;
+}
+
+/* Call to Action Controls */
+.btn-primary {
+    width: 100%;
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+/* Container Layout updates */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Dashboard Header Flex Design */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.header-text h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+
+.add-btn {
+    width: auto;
+    padding: 10px 18px;
+    font-size: 0.9rem;
+}
+
+/* Modern Data Table Card Container */
+.table-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Data Table Grid System */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.data-table th {
+    background-color: rgba(0, 0, 0, 0.02);
+    color: var(--text-muted);
+    font-weight: 600;
+    padding: 14px 20px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.theme-checkbox:checked ~ .theme-wrapper .data-table th {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.data-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-main);
+    white-space: nowrap;
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table tr:hover td {
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+.theme-checkbox:checked ~ .theme-wrapper .data-table tr:hover td {
+    background-color: rgba(255, 255, 255, 0.01);
+}
+
+/* Formatting Elements */
+.font-medium { font-weight: 500; }
+.text-muted { color: var(--text-muted); }
+.text-center { text-align: center; }
+
+.course-tag {
+    background-color: rgba(37, 99, 235, 0.08);
+    color: var(--accent-color);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Dynamic State Badges */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 9999px;
+}
+
+/* Fallback default, active, and custom status color rules */
+.status-badge, .status-active {
+    color: #16a34a;
+    background-color: rgba(22, 163, 74, 0.1);
+}
+
+.status-inactive, .status-disabled {
+    color: #dc2626;
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+.status-pending {
+    color: #d97706;
+    background-color: rgba(217, 119, 6, 0.1);
+}
+
+/* Action Form Alignment */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.btn-action {
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-edit:hover {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border-color: var(--accent-color);
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+    color: #ffffff;
+    border-color: #dc2626;
+}
+
+/* Registration Component Layouts */
+.form-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-header {
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.form-header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-main);
+    margin: 12px 0 4px 0;
+}
+
+/* Subtle Back Action Trigger Link */
+.btn-back {
+    display: inline-block;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.btn-back:hover {
+    color: var(--accent-hover);
+}
+
+/* Centralized Form Card Sheet */
+.form-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: var(--shadow);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Form Container Controls */
+.crud-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Flexible Multi-Column Subgrids */
+.form-grid-2col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+/* Class Labels UI */
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-main);
+    letter-spacing: -0.01em;
+}
+
+/* Consolidated Fields / Inputs Inputs Styling */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="date"],
+.form-group input[type="password"],
+.form-group select {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.3s;
+}
+
+/* Fix option visibility in native select dropdowns */
+.form-group select option {
+    background-color: var(--bg-card);
+    color: var(--text-main);
+}
+
+/* Explicit fallback override for dark theme active state */
+.theme-checkbox:checked ~ .theme-wrapper .form-group select option {
+    background-color: #131A26; /* Hardcoded dark fallback to override native OS styles */
+    color: #F9FAFB;
+}
+
+/* Professional Input Focus States */
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Native dark input field optimizations */
+.theme-checkbox:checked ~ .theme-wrapper .form-group input,
+.theme-checkbox:checked ~ .theme-wrapper .form-group select {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.theme-checkbox:checked ~ .theme-wrapper .form-group input:focus,
+.theme-checkbox:checked ~ .theme-wrapper .form-group select:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.submit-btn {
+    margin-top: 8px;
+    padding: 12px 24px;
+}
+
+/* Profile Avatar Layout Structure */
+.profile-avatar-sec {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.avatar-frame {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--accent-color);
+    box-shadow: var(--shadow);
+    background-color: var(--bg-main);
+}
+
+.avatar-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-avatar-sec h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-top: 16px;
+}
+
+.student-meta-id {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background-color: rgba(0, 0, 0, 0.04);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 4px;
+}
+
+.theme-checkbox:checked ~ .theme-wrapper .student-meta-id {
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Info Banner Component */
+.info-banner-badge {
+    margin-top: 14px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.badge-plain {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+/* Security Elements */
+.secure-group {
+    background-color: rgba(239, 68, 68, 0.02);
+    padding: 16px;
+    border: 1px dashed rgba(239, 68, 68, 0.2);
+    border-radius: 8px;
+}
+
+.label-alert {
+    color: #DC2626 !important;
+}
+
+.password-note {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+/* Purge Panel Center Alignment */
+.delete-card {
+    text-align: center;
+    border-color: rgba(220, 38, 38, 0.25);
+    padding: 40px 32px;
+}
+
+.danger-icon-wrapper {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    display: inline-block;
+    line-height: 1;
+}
+
+.delete-card h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #DC2626;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+.danger-subtitle {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+/* Informational Hint Row Setup */
+.verification-hint-box {
+    background-color: rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.theme-checkbox:checked ~ .theme-wrapper .verification-hint-box {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.hint-label {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.hint-value {
+    font-family: monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+    background-color: var(--bg-card);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+/* Individual Destructive Input Configuration */
+.spec-danger-group {
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.btn-danger-action {
+    background-color: #DC2626;
+    margin-top: 12px;
+}
+
+.btn-danger-action:hover {
+    background-color: #B91C1C;
+}
+
+.btn-danger-action:active {
+    transform: scale(0.99);
+}

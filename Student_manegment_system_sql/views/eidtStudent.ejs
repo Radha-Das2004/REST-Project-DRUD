@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student Details</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <input type="checkbox" id="themeToggle" class="theme-checkbox">
+    
+    <div class="theme-wrapper">
+        <div class="toggle-container">
+            <label for="themeToggle" class="btn-theme-toggle">
+                <span class="light-icon">☀️ Light Mode</span>
+                <span class="dark-icon">🌙 Dark Mode</span>
+            </label>
+        </div>
+
+        <div class="form-container">
+            <header class="form-header">
+                <a href="/student" class="btn-back">← Back to Roster</a>
+            </header>
+
+            <main class="form-card edit-card">
+                <div class="profile-avatar-sec">
+                    <div class="avatar-frame">
+                        <img src="<%= student.image ? student.image : '/uploads/default.jpg' %>" alt="Student Profile" onerror="this.src='/uploads/default.jpg';">
+                    </div>
+                    <h2>Update Profile</h2>
+                    <span class="student-meta-id">System ID: <%= student.id %></span>
+                    
+                    <div class="info-banner-badge">
+                        Current Security Key: <span class="badge-plain"><%= student.password %></span>
+                    </div>
+                </div>
+
+                <form method="post" action="/student/<%= student.id %>?_method=PATCH" class="crud-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" value="<%= student.name %>" placeholder="Update Full Name" />
+                    </div>
+
+                    <div class="form-grid-2col">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" value="<%= student.email %>" placeholder="name@example.com" />
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" value="<%= student.phone %>" placeholder="Phone Number" />
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2col">
+                        <div class="form-group">
+                            <label for="course">Course Track</label>
+                            <select id="course" name="course">
+                                <option value="">-- Choose Course --</option>
+                                <option value="BCA" <%= student.course === 'BCA' ? 'selected' : '' %>>BCA</option>
+                                <option value="BBA" <%= student.course === 'BBA' ? 'selected' : '' %>>BBA</option>
+                                <option value="B.Tech" <%= student.course === 'B.Tech' ? 'selected' : '' %>>B.Tech</option>
+                                <option value="MBA" <%= student.course === 'MBA' ? 'selected' : '' %>>MBA</option>
+                                <option value="MCA" <%= student.course === 'MCA' ? 'selected' : '' %>>MCA</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Enrollment Status</label>
+                            <select id="status" name="status">
+                                <option value="Active" <%= student.status === 'Active' ? 'selected' : '' %>>Active</option>
+                                <option value="Inactive" <%= student.status === 'Inactive' ? 'selected' : '' %>>Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group secure-group">
+                        <label for="password" class="label-alert">Confirm Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter current password to save changes" required />
+                        <span class="password-note">* Verification required to authorize this record modification</span>
+                    </div>
+
+                    <button class="btn-primary submit-btn">Save Profile Changes</button>
+                </form>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

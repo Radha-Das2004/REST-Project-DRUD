@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Student Roster</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <input type="checkbox" id="themeToggle" class="theme-checkbox">
+    
+    <div class="theme-wrapper">
+        <div class="toggle-container">
+            <label for="themeToggle" class="btn-theme-toggle">
+                <span class="light-icon">☀️ Light Mode</span>
+                <span class="dark-icon">🌙 Dark Mode</span>
+            </label>
+        </div>
+
+        <div class="container">
+            <header class="dashboard-header">
+                <div class="header-text">
+                    <h1>Student Directory</h1>
+                    <p class="subtitle">Overview of all active, inactive, and pending student admissions profiles.</p>
+                </div>
+                <form method="get" action="/student/newStudent">
+                    <button class="btn-primary add-btn">+ Add New Student</button>
+                </form>
+            </header>
+
+            <main class="table-card">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Date of Birth</th>
+                                <th>Course</th>
+                                <th>Enrollment Date</th>
+                                <th>Status</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let student of students){ %>
+                                <tr>
+                                    <td class="font-medium"><%= student.name %></td>
+                                    <td class="text-muted"><%= student.email %></td>
+                                    <td><%= student.phone %></td>
+                                    <td><%= student.date_of_birth ? new Date(student.date_of_birth).toLocaleDateString('en-GB') : '—' %></td>
+                                    <td><span class="course-tag"><%= student.course %></span></td>
+                                    <td><%= student.enrollment_date ? new Date(student.enrollment_date).toLocaleDateString('en-GB') : '—' %></td>
+                                    <td>
+                                        <span class="status-badge status-<%= String(student.status).toLowerCase() %>">
+                                            <%= student.status %>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <form method="GET" action="/student/<%= student.id %>/edit">
+                                                <button class="btn-action btn-edit">Edit</button>
+                                            </form>
+                                            <form method="GET" action="/student/<%= student.id %>/delete">
+                                                <button class="btn-action btn-delete">Delete</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
