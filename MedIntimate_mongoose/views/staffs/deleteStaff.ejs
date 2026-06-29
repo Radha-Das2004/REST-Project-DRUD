@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedIntimate — Secure Personnel De-Authorization</title>
+    <!-- Premium Fonts & Professional Iconography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Shared Global Layout Stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    
+    <style>
+        .destruction-wrapper {
+            width: 100%;
+            max-width: 600px;
+            margin: 3.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Authorization Terminal Component Base */
+        .terminal-card {
+            background: linear-gradient(145deg, rgba(24, 15, 20, 0.92) 0%, rgba(15, 23, 42, 0.85) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 28px;
+            padding: 3rem;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            box-shadow: 0 35px 75px rgba(0, 0, 0, 0.7), 0 0 50px rgba(239, 68, 68, 0.05);
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.97) translateY(15px);
+            animation: gatewayEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Sequential Cascade Entrance States */
+        .cascade-1 { animation-delay: 0.1s; }
+        .cascade-2 { opacity: 0; animation: subFadeIn 0.5s ease-out 0.25s forwards; }
+        .cascade-3 { opacity: 0; animation: subFadeIn 0.5s ease-out 0.35s forwards; }
+        .cascade-4 { opacity: 0; animation: subFadeIn 0.5s ease-out 0.45s forwards; }
+
+        .alert-shield-icon {
+            width: 76px;
+            height: 76px;
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            border-radius: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.25rem;
+            color: #ef4444;
+            margin: 0 auto 1.5rem auto;
+            animation: structuralPulse 2.5s infinite ease-in-out;
+        }
+
+        .terminal-card h2 {
+            font-size: 1.65rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.025em;
+        }
+
+        .terminal-card p.warning-desc {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-top: 0.65rem;
+            line-height: 1.6;
+        }
+
+        /* Target Profile Preview Block */
+        .target-profile-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 2.25rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            text-align: left;
+            transition: var(--transition-smooth);
+        }
+
+        .target-profile-card:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(239, 68, 68, 0.15);
+        }
+
+        .target-avatar-wrapper {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, #ef4444 0%, rgba(255, 255, 255, 0.05) 100%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .target-avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            background: #111827;
+        }
+
+        .target-meta-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: -0.01em;
+        }
+
+        .target-meta-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .target-meta-info p i {
+            color: rgba(14, 165, 233, 0.8);
+            width: 14px;
+        }
+
+        .patient-count-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            margin-top: 0.65rem;
+            background: rgba(14, 165, 233, 0.08);
+            border: 1px solid rgba(14, 165, 233, 0.18);
+            color: #38bdf8;
+            padding: 0.25rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+
+        /* Password Gate Security Input Box */
+        .security-input-shell {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 2.25rem;
+        }
+
+        .security-input-shell i {
+            position: absolute;
+            left: 1.35rem;
+            color: rgba(156, 163, 175, 0.35);
+            font-size: 1.05rem;
+            transition: var(--transition-smooth);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .security-field-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 1.25rem 1rem 1.25rem 3.5rem;
+            color: #ffffff;
+            font-family: var(--font-stack);
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+            text-align: left;
+        }
+
+        .security-field-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.03);
+            border-color: #ef4444;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+        }
+
+        .security-field-input:focus + i {
+            color: #ef4444;
+            transform: scale(1.05);
+        }
+
+        /* Split-Flow Controls Integration Grid */
+        .flow-action-matrix {
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-terminal-trigger {
+            padding: 1.15rem;
+            border-radius: 14px;
+            font-family: var(--font-stack);
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            border: none;
+        }
+
+        .btn-confirm-destruction {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.25);
+        }
+
+        /* Interactive Physics-based subtle shake on deletion trigger */
+        .btn-confirm-destruction:hover {
+            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.45);
+            transform: translateY(-2px);
+            animation: physicsDestructWiggle 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+
+        .btn-cancel-abort {
+            background: rgba(255, 255, 255, 0.04);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-cancel-abort:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* --- High-Fidelity Micro-Animation Frames --- */
+        @keyframes gatewayEntrance {
+            from { opacity: 0; transform: scale(0.97) translateY(20px); filter: blur(5px); }
+            to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        }
+
+        @keyframes subFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes structuralPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+            50% { transform: scale(1.04); box-shadow: 0 0 25px 3px rgba(239, 68, 68, 0.15); }
+        }
+
+        @keyframes physicsDestructWiggle {
+            10%, 90% { transform: translate3d(-1px, -2px, 0); }
+            20%, 80% { transform: translate3d(1.5px, -2px, 0); }
+            30%, 50%, 70% { transform: translate3d(-2px, -2px, 0); }
+            40%, 60% { transform: translate3d(2px, -2px, 0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Real-world stylized high-resolution abstract healthcare overlay backdrop -->
+    <div class="bg-overlay"></div>
+
+    <div class="destruction-wrapper">
+        <main class="terminal-card cascade-1">
+            
+            <div class="alert-shield-icon">
+                <i class="fa-solid fa-shield-virus"></i>
+            </div>
+            
+            <h2 class="cascade-2">De-Authorize Practitioner Account</h2>
+            <p class="warning-desc cascade-2">You are performing a destructive operation. This will cleanly separate the selected personnel records and drop active scheduling tokens immediately from the clinical grid.</p>
+
+            <!-- Dynamic Profile Preview Panel with Cascade Entrance -->
+            <div class="target-profile-card cascade-3">
+                <div class="target-avatar-wrapper">
+                    <img src="<%= staff.image ? staff.image : 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=256&q=80' %>" alt="<%= staff.staffName %>">
+                </div>
+                <div class="target-meta-info">
+                    <h3><%= staff.staffName %></h3>
+                    <p><i class="fa-solid fa-stethoscope"></i> <span><%= staff.designation %></span></p>
+                    <p><i class="fa-solid fa-hashtag"></i> <span>Ext: <%= staff.phone %></span></p>
+                    
+                    <span class="patient-count-badge">
+                        <i class="fa-solid fa-hospital-user"></i> Active Case Allocations: Verified
+                    </span>
+                </div>
+            </div>
+
+            <!-- Dynamic POST form passing your Express deletePassword logic seamlessly -->
+            <form method="POST" action="/medIntimate/staffs/<%= staff._id %>?_method=DELETE" class="cascade-4">
+                
+                <!-- Explicit mapping values passed inside the active session context payload -->
+                <input type="hidden" name="staffName" value="<%= staff.staffName %>">
+                <input type="hidden" name="designation" value="<%= staff.designation %>">
+                <input type="hidden" name="phone" value="<%= staff.phone %>">
+                <input type="hidden" name="image" value="<%= staff.image %>">
+
+                <!-- Interactive Input Box with Focus Glow Indicators -->
+                <div class="security-input-shell">
+                    <input type="password" id="passwordGate" name="deletePassword" class="security-field-input" placeholder="Type staff designation to confirm authorization signature" required autocomplete="off">
+                    <i class="fa-solid fa-key-skeleton"></i>
+                </div>
+
+                <!-- Action Controls Matrix Matrix Base -->
+                <div class="flow-action-matrix">
+                    <button type="submit" class="btn-terminal-trigger btn-confirm-destruction">
+                        <i class="fa-solid fa-user-slash"></i>
+                        <span>Confirm Deletion</span>
+                    </button>
+                    
+                    <a href="/medIntimate/staffs" class="btn-terminal-trigger btn-cancel-abort">
+                        <i class="fa-solid fa-ban"></i>
+                        <span>Abort</span>
+                    </a>
+                </div>
+            </form>
+
+        </main>
+    </div>
+</body>
+</html>
