@@ -1,0 +1,48 @@
+<% layout("/layouts/boilerplate") %>
+
+<section class="sc-auth-section">
+    <div class="sc-auth-container">
+        <div class="sc-auth-header">
+            <span class="material-symbols-outlined auth-icon">fingerprint</span>
+            <h2>Welcome Back</h2>
+            <p>Login to securely manage your ClassPulse ecosystem</p>
+        </div>
+
+        <form action="/stackcampus/login" method="POST" class="sc-auth-form">
+            <div class="sc-form-group">
+                <label for="email" class="sc-form-label">Email Address</label>
+                <div class="sc-input-wrapper">
+                    <span class="material-symbols-outlined input-icon">mail</span>
+                    <input 
+                        type="email" 
+                        id="email"
+                        name="login[email]" 
+                        placeholder="name@institution.com" 
+                        class="sc-form-input" 
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="sc-form-group">
+                <label for="password" class="sc-form-label">Password</label>
+                <div class="sc-input-wrapper">
+                    <span class="material-symbols-outlined input-icon">lock</span>
+                    <input 
+                        type="text" 
+                        id="password"
+                        name="login[password]" 
+                        placeholder="••••••••••••" 
+                        class="sc-form-input" 
+                        required
+                    >
+                </div>
+            </div>
+
+            <button type="submit" class="sc-btn sc-btn-primary sc-btn-auth">
+                <span>Sign In to System</span>
+                <span class="material-symbols-outlined btn-arrow">arrow_forward</span>
+            </button>
+        </form>
+    </div>
+</section>

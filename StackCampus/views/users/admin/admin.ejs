@@ -1,0 +1,228 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="sc-dashboard-wrapper">
+    <header class="sc-dashboard-header">
+        <div class="header-left">
+            <span class="material-symbols-outlined dashboard-icon">dashboard</span>
+            <div>
+                <h2>Principal Dashboard</h2>
+                <p>Welcome back, <strong><%= adminName %></strong>. Monitor institutional performance, manage teachers, and allocate batches.</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="sc-analytics-grid matrix-cards">
+        <div class="sc-stat-card dynamic-action-card">
+            <div class="stat-card-inner">
+                <div class="stat-icon-wrapper blue-glow">
+                    <span class="material-symbols-outlined">co_present</span>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">Active Faculty</span>
+                    <h3 class="stat-number"><%= countTeachers %></h3>
+                </div>
+            </div>
+            <div class="stat-card-action">
+                <a href="/stackcampus/admin/view-teachers" class="sc-card-btn btn-blue">
+                    <span>Manage Faculty</span>
+                    <span class="material-symbols-outlined">arrow_outward</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="sc-stat-card dynamic-action-card">
+            <div class="stat-card-inner">
+                <div class="stat-icon-wrapper lime-glow">
+                    <span class="material-symbols-outlined">school</span>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">Enrolled Students</span>
+                    <h3 class="stat-number"><%= countStudents %></h3>
+                </div>
+            </div>
+            <div class="stat-card-action">
+                <a href="/stackcampus/admin/view-students" class="sc-card-btn btn-lime">
+                    <span>View Rosters</span>
+                    <span class="material-symbols-outlined">arrow_outward</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="sc-stat-card dynamic-action-card">
+            <div class="stat-card-inner">
+                <div class="stat-icon-wrapper yellow-glow">
+                    <span class="material-symbols-outlined">layers</span>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">Active Batches</span>
+                    <h3 class="stat-number"><%= countBatches %></h3>
+                </div>
+            </div>
+            <div class="stat-card-action">
+                <a href="#active-batches-table" class="sc-card-btn btn-yellow">
+                    <span>Track Batches</span>
+                    <span class="material-symbols-outlined">arrow_downward</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="sc-split-forms-grid">
+        <div class="sc-dashboard-card">
+            <div class="card-title-group">
+                <span class="material-symbols-outlined">person_add</span>
+                <h3>Add a New Teacher</h3>
+            </div>
+            <form method="post" action="/stackcampus/admin/add-teacher" class="sc-dashboard-form">
+                <div class="sc-form-group">
+                    <label for="name" class="sc-form-label">Teacher Name</label>
+                    <div class="sc-input-wrapper">
+                        <span class="material-symbols-outlined input-icon">badge</span>
+                        <input type="text" id="name" name="teacher[name]" class="sc-form-input" placeholder="e.g. Prof. Alan Turing" required>
+                    </div>
+                </div>
+                <div class="sc-form-group">
+                    <label for="image" class="sc-form-label">Teacher Avatar URL</label>
+                    <div class="sc-input-wrapper">
+                        <span class="material-symbols-outlined input-icon">link</span>
+                        <input type="url" id="image" name="teacher[image]" class="sc-form-input" placeholder="https://example.com/photo.png" required>
+                    </div>
+                </div>
+                <div class="sc-form-group">
+                    <label for="email" class="sc-form-label">Institutional Email</label>
+                    <div class="sc-input-wrapper">
+                        <span class="material-symbols-outlined input-icon">mail</span>
+                        <input type="email" id="email" name="teacher[email]" class="sc-form-input" placeholder="turing@stackcampus.com" required>
+                    </div>
+                </div>
+                <div class="sc-form-group">
+                    <label for="phone" class="sc-form-label">Contact Number</label>
+                    <div class="sc-input-wrapper">
+                        <span class="material-symbols-outlined input-icon">call</span>
+                        <input type="text" id="phone" name="teacher[phone]" class="sc-form-input" placeholder="+1 (555) 019-2834" required>
+                    </div>
+                </div>
+                <div class="sc-form-group">
+                    <label for="password" class="sc-form-label">Temporary Access Password</label>
+                    <div class="sc-input-wrapper">
+                        <span class="material-symbols-outlined input-icon">lock</span>
+                        <input type="password" id="password" name="teacher[password]" class="sc-form-input" placeholder="Create strong password" required>
+                    </div>
+                </div>
+                <button type="submit" class="sc-btn sc-btn-primary full-width-btn">
+                    <span class="material-symbols-outlined">person_add</span> Add New Faculty
+                </button>
+            </form>
+        </div>
+
+        <div class="sc-dashboard-card">
+            <div class="card-title-group">
+                <span class="material-symbols-outlined">add_box</span>
+                <h3>Create a New Batch</h3>
+            </div>
+            <form action="/stackcampus/admin/create-batch" method="POST" class="sc-dashboard-form">
+                <div class="sc-form-group">
+                    <label for="batchName" class="sc-form-label">Batch Name</label>
+                    <div class="sc-input-wrapper">
+                        <span class="material-symbols-outlined input-icon">title</span>
+                        <input type="text" id="batchName" name="batch[batchName]" class="sc-form-input" placeholder="e.g. Node.js Architecture Masterclass" required>
+                    </div>
+                </div>
+                <div class="sc-form-group">
+                    <label for="batchImage" class="sc-form-label">Batch Banner Graphic URL</label>
+                    <div class="sc-input-wrapper">
+                        <span class="material-symbols-outlined input-icon">image</span>
+                        <input type="text" id="batchImage" name="batch[batchImage]" class="sc-form-input" placeholder="https://example.com/banner.jpg">
+                    </div>
+                </div>
+                <div class="sc-form-group">
+                    <label for="totalSeats" class="sc-form-label">Total Student Capacity</label>
+                    <div class="sc-input-wrapper">
+                        <span class="material-symbols-outlined input-icon">groups</span>
+                        <input type="number" id="totalSeats" name="batch[totalSeats]" class="sc-form-input" placeholder="Maximum seats allocation, e.g. 40" required>
+                    </div>
+                </div>
+                <div class="sc-form-group">
+                    <label for="teacher" class="sc-form-label">Assign Faculty Director</label>
+                    <div class="sc-input-wrapper">
+                        <span class="material-symbols-outlined input-icon">person_celebrate</span>
+                        <select id="teacher" name="batch[teacherId]" class="sc-form-input sc-form-select" required>
+                            <option value="">-- Choose Instructor --</option>
+                            <% for(let teacher of teachers) { %>
+                                <option value="<%= teacher._id %>"><%= teacher.name %> (<%= teacher.email %>)</option>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="sc-btn sc-btn-primary full-width-btn allocation-btn">
+                    <span class="material-symbols-outlined">rule</span> Initialize Academic Batch
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <section id="active-batches-table" class="sc-dashboard-card table-card-layer">
+        <div class="card-title-group space-between-layout">
+            <div class="flex-align">
+                <span class="material-symbols-outlined">table_chart</span>
+                <h3>All Created Institutional Batches</h3>
+            </div>
+            <span class="badge-count-tag"><%= batches.length %> Live Programs</span>
+        </div>
+        
+        <div class="table-responsive-wrapper">
+            <table class="sc-premium-table">
+                <thead>
+                    <tr>
+                        <th>Batch Profile Name</th>
+                        <th>Assigned Faculty</th>
+                        <th>Total Capacity</th>
+                        <th>Available Seats</th>
+                        <th>Enrolled Students</th>
+                        <th class="text-right-aligned">Operational Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (batches.length === 0) { %>
+                        <tr>
+                            <td colspan="6" class="table-empty-fallback">
+                                <span class="material-symbols-outlined">folder_open</span>
+                                <p>No batches registered to the StackCampus engine yet.</p>
+                            </td>
+                        </tr>
+                    <% } else { %>
+                        <% for(let batch of batches) { %>
+                            <tr>
+                                <td class="font-bold-title"><%= batch.batchName %></td>
+                                <td>
+                                    <div class="faculty-cell">
+                                        <span class="material-symbols-outlined faculty-avatar-icon">account_circle</span>
+                                        <span><%= batch.teacher ? batch.teacher.name : 'Unassigned/Vacancy' %></span>
+                                    </div>
+                                </td>
+                                <td><span class="numeric-badge grey-badge"><%= batch.totalSeats %> Max</span></td>
+                                <td>
+                                    <span class="numeric-badge <%= batch.availableSeats > 0 ? 'success-badge' : 'danger-badge' %>">
+                                        <%= batch.availableSeats %> Seats Left
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="student-count-indicator">
+                                        <span class="material-symbols-outlined">group</span>
+                                        <strong><%= batch.studentsEnrolled.length %></strong>
+                                    </span>
+                                </td>
+                                <td class="text-right-aligned">
+                                    <a href="/stackcampus/admin/batch-students/<%= batch._id %>" class="sc-action-pill">
+                                        <span>Roster Records</span>
+                                        <span class="material-symbols-outlined">arrow_right_alt</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        <% } %>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

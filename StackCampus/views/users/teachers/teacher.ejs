@@ -1,0 +1,72 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="sc-teacher-portal-wrapper">
+    <!-- Section 1: Welcoming Context Header -->
+    <header class="sc-dashboard-header">
+        <div class="header-left">
+            <span class="material-symbols-outlined dashboard-icon">co_present</span>
+            <div>
+                <h2>Teacher Dashboard</h2>
+                <p>Welcome back, Instructor <strong><%= teacher.name %></strong>. Track your assigned academic tracks and rosters.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section 2: Assigned Batches Layer -->
+    <section class="sc-courses-matrix">
+        <div class="card-title-group compact-title-group">
+            <span class="material-symbols-outlined">layers</span>
+            <h3>My Assigned Batches</h3>
+        </div>
+
+        <% if(myBatches.length === 0) { %>
+            <div class="sc-empty-matrix-fallback warning-state">
+                <span class="material-symbols-outlined fallback-icon">assignment_late</span>
+                <h3>No Assigned Batches</h3>
+                <p>You have not been allocated any operational batch schedules for this active academic semester yet.</p>
+            </div>
+        <% } else { %>
+            <div class="sc-cards-grid">
+                <% for(let batch of myBatches) { %>
+                    <div class="sc-course-card teacher-border-accent">
+                        <!-- Media Box Banner Container -->
+                        <div class="sc-card-media-wrapper">
+                            <img src="<%= batch.batchImage || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400' %>" alt="<%= batch.batchName %> Banner" class="sc-card-img" onerror="this.src='https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400'">
+                            <div class="sc-media-gradient-overlay"></div>
+                            
+                            <!-- Dynamic Seat State Counter Badge -->
+                            <div class="sc-seats-tag <%= batch.availableSeats > 0 ? 'seats-available' : 'seats-filled' %>">
+                                <span class="status-indicator-dot"></span>
+                                <span><%= batch.availableSeats %> Open Slots</span>
+                            </div>
+                        </div>
+
+                        <!-- Card Body Details -->
+                        <div class="sc-card-body-content">
+                            <h4 class="sc-card-title-text"><%= batch.batchName %></h4>
+                            
+                            <div class="sc-metric-data-row">
+                                <div class="metric-pill">
+                                    <span class="material-symbols-outlined">groups</span>
+                                    <span>Capacity: <strong><%= batch.totalSeats %></strong></span>
+                                </div>
+                                <div class="metric-pill highlighted-pill">
+                                    <span class="material-symbols-outlined">person</span>
+                                    <span>Enrolled: <strong><%= batch.studentsEnrolled.length %></strong></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Controls Footer -->
+                        <div class="sc-card-footer-actions">
+                            <a href="/stackcampus/admin/batch-students/<%= batch._id %>" class="sc-btn sc-btn-primary sc-faculty-action-btn">
+                                <span>View Roster Directory</span>
+                                <span class="material-symbols-outlined action-arrow">group</span>
+                            </a>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+    </section>
+</div>

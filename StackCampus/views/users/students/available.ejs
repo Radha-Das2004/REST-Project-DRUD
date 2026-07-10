@@ -1,0 +1,67 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="sc-dashboard-wrapper">
+    <header class="sc-dashboard-header">
+        <div class="header-left">
+            <span class="material-symbols-outlined dashboard-icon">explore</span>
+            <div>
+                <h2>Available Cohorts & Tracks</h2>
+                <p>Advance your engineering career. Select from active computing curricula below.</p>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="/stackcampus/student" class="sc-action-pill">
+                <span class="material-symbols-outlined">arrow_back</span>
+                <span>Back to Dashboard</span>
+            </a>
+        </div>
+    </header>
+
+    <section class="sc-courses-matrix">
+        <% if (availableBatches.length === 0) { %>
+            <div class="sc-empty-matrix-fallback">
+                <span class="material-symbols-outlined fallback-icon">task_alt</span>
+                <h3>Fully Enrolled</h3>
+                <p>Incredible tracking! You have successfully registered for all available active institutional batches.</p>
+            </div>
+        <% } else { %>
+            <div class="sc-cards-grid">
+                <% for(let batch of availableBatches) { %>
+                    <div class="sc-course-card">
+                        <div class="sc-card-media-wrapper">
+                            <img src="<%= batch.batchImage || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600' %>" alt="<%= batch.batchName %> Banner" class="sc-card-img" onerror="this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600'">
+                            <div class="sc-media-gradient-overlay"></div>
+                            
+                            <div class="sc-seats-tag <%= batch.availableSeats > 0 ? 'seats-available' : 'seats-filled' %>">
+                                <span class="status-indicator-dot"></span>
+                                <span><%= batch.availableSeats %> Seats Open</span>
+                            </div>
+                        </div>
+
+                        <div class="sc-card-body-content">
+                            <h4 class="sc-card-title-text"><%= batch.batchName %></h4>
+                            
+                            <div class="sc-instructor-profile-row">
+                                <span class="material-symbols-outlined field-icon">co_present</span>
+                                <div class="instructor-meta">
+                                    <span class="meta-label">Lead Faculty</span>
+                                    <span class="meta-value"><%= batch.teacher ? batch.teacher.name : 'Staff Instructor' %></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sc-card-footer-actions">
+                            <form method="POST" action="/stackcampus/student/<%= student._id %>/enroll" class="sc-enrollment-form">
+                                <input type="hidden" name="batchId" value="<%= batch._id %>">
+                                <button type="submit" class="sc-btn sc-btn-primary sc-enroll-action-btn">
+                                    <span>Initialize Enrollment</span>
+                                    <span class="material-symbols-outlined action-arrow">chevron_right</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+    </section>
+</div>

@@ -1,0 +1,76 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="sc-dashboard-wrapper">
+    <header class="sc-dashboard-header">
+        <div class="header-left">
+            <span class="material-symbols-outlined dashboard-icon">groups</span>
+            <div>
+                <h2>Batch Roster Directory</h2>
+                <p>Viewing students enrolled in <strong><%= studentBatch.batchName %></strong></p>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="javascript:history.back()" class="sc-action-pill">
+                <span class="material-symbols-outlined">arrow_back</span>
+                <span>Return to Dashboard</span>
+            </a>
+        </div>
+    </header>
+
+    <section class="sc-dashboard-card table-card-layer">
+        <div class="card-title-group space-between-layout">
+            <div class="flex-align">
+                <span class="material-symbols-outlined">badge</span>
+                <h3>Verified Student Roster</h3>
+            </div>
+            <span class="badge-count-tag"><%= studentBatch.studentsEnrolled.length %> Enrolled</span>
+        </div>
+
+        <div class="table-responsive-wrapper">
+            <table class="sc-premium-table">
+                <thead>
+                    <tr>
+                        <th class="avatar-col-width">Profile</th>
+                        <th>Student Name</th>
+                        <th>Institutional Email Address</th>
+                        <th class="text-right-aligned">System Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (studentBatch.studentsEnrolled.length === 0) { %>
+                        <tr>
+                            <td colspan="4" class="table-empty-fallback">
+                                <span class="material-symbols-outlined">group_remove</span>
+                                <p>No students have registered or enrolled in this batch yet.</p>
+                            </td>
+                        </tr>
+                    <% } else { %>
+                        <% for(let studentB of studentBatch.studentsEnrolled) { %>
+                            <tr>
+                                <td class="avatar-col-width">
+                                    <div class="sc-avatar-wrapper">
+                                        <img src="<%= studentB.image || '/default.png' %>" alt="<%= studentB.name %>'s profile" class="sc-avatar-circle" onerror="this.src='/default.png'">
+                                        <div class="sc-avatar-ring"></div>
+                                    </div>
+                                </td>
+                                <td class="font-bold-title"><%= studentB.name %></td>
+                                <td>
+                                    <div class="sc-email-link-cell">
+                                        <span class="material-symbols-outlined">mail</span>
+                                        <span><%= studentB.email %></span>
+                                    </div>
+                                </td>
+                                <td class="text-right-aligned">
+                                    <span class="sc-status-pill verified">
+                                        <span class="status-dot"></span>
+                                        <span>Active</span>
+                                    </span>
+                                </td>
+                            </tr>      
+                        <% } %>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

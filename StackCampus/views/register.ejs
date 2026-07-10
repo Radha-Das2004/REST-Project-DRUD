@@ -1,0 +1,102 @@
+<% layout("/layouts/boilerplate") %>
+
+<section class="sc-auth-section">
+    <div class="sc-auth-container data-entry-panel">
+        <div class="sc-auth-header">
+            <span class="material-symbols-outlined auth-icon">person_add</span>
+            <h2>Create Account</h2>
+            <p>Join the StackCampus ecosystem to manage your records</p>
+        </div>
+
+        <form action="/stackcampus/register" method="POST" class="sc-auth-form">
+            <div class="sc-form-group">
+                <label for="name" class="sc-form-label">Full Name</label>
+                <div class="sc-input-wrapper">
+                    <span class="material-symbols-outlined input-icon">badge</span>
+                    <input 
+                        type="text" 
+                        id="name"
+                        name="register[name]" 
+                        placeholder="Yash Prakash" 
+                        class="sc-form-input" 
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="sc-form-group">
+                <label for="email" class="sc-form-label">Email Address</label>
+                <div class="sc-input-wrapper">
+                    <span class="material-symbols-outlined input-icon">mail</span>
+                    <input 
+                        type="email" 
+                        id="email"
+                        name="register[email]" 
+                        placeholder="name@institution.com" 
+                        class="sc-form-input" 
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="sc-form-group">
+                <label for="phone" class="sc-form-label">Phone Number</label>
+                <div class="sc-input-wrapper">
+                    <span class="material-symbols-outlined input-icon">call</span>
+                    <input 
+                        type="tel" 
+                        id="phone"
+                        name="register[phone]" 
+                        placeholder="+91 XXXXX XXXXX" 
+                        class="sc-form-input" 
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="sc-form-group">
+                <label for="password" class="sc-form-label">Secure Password</label>
+                <div class="sc-input-wrapper">
+                    <span class="material-symbols-outlined input-icon">lock</span>
+                    <input 
+                        type="password" 
+                        id="password"
+                        name="register[password]" 
+                        placeholder="••••••••••••" 
+                        class="sc-form-input" 
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="sc-form-group">
+                <label for="image" class="sc-form-label">Avatar Image URL (Optional)</label>
+                <div class="sc-input-wrapper">
+                    <span class="material-symbols-outlined input-icon">link</span>
+                    <input 
+                        type="text" 
+                        id="image"
+                        name="register[image]" 
+                        placeholder="https://example.com/avatar.jpg" 
+                        class="sc-form-input"
+                    >
+                </div>
+            </div>
+
+            <div class="sc-form-group">
+                <label for="role" class="sc-form-label">Institutional Role</label>
+                <div class="sc-input-wrapper">
+                    <span class="material-symbols-outlined input-icon">manage_accounts</span>
+                    <select id="role" name="register[role]" class="sc-form-input sc-form-select">
+                        <option value="student">Student</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="sc-btn sc-btn-primary sc-btn-auth">
+                <span>Complete Registration</span>
+                <span class="material-symbols-outlined btn-arrow">how_to_reg</span>
+            </button>
+        </form>
+    </div>
+</section>
